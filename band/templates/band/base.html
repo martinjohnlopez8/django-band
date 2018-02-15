@@ -1,0 +1,38 @@
+{% load staticfiles %}
+
+<html>
+    <head>
+        <title>Band</title>
+        <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css">
+        <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap-theme.min.css">
+        <link rel="stylesheet" href="{% static 'band/style.css' %}">
+    </head>
+    <body>
+        <nav class="navbar navbar-default">
+            <div class="container-fluid">
+                <div class="row">
+                    <div class="navbar-header col-md-8">
+                        <a class="navbar-brand" href="/">BANDA RITO BANDA ROON</a>
+                    </div>
+                    <ul class="nav navbar-nav col-md-4">
+                      <li><a href="{% url 'band:band_list' %}">Bands</a></li>
+                      <li><a href="{% url 'band:album_list' %}">Albums</a></li>
+                      <li><a href="{% url 'band:song_list' %}">Songs</a></li>
+                      <li><a href="{% url 'band:musician_list'%}">Musicians</a></li>
+                      {% if user.is_authenticated %}
+                      <li><a href="{% url 'band:logout' %}">Log Out</a></li>
+                      {% else %}
+                      <li><a href="{% url 'band:login' %}">Log In</a></li>
+                      {% endif %}
+                    </ul>
+                </div>
+            </div>
+        </nav>
+        <div class="container-fluid">
+            <div class="row">
+                {% block content %}
+                {% endblock %}
+            </div>
+        </div>
+    </body>
+</html>

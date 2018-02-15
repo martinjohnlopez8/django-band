@@ -1,0 +1,35 @@
+{% extends 'band/base.html' %}
+
+{% block content %}
+<div class="container-fluid">
+	<div class="row">
+		<div class="col-md-6">
+			<form method="POST">{% csrf_token %}
+				<input type="text" name="band-input" class="search-top" placeholder="Search for a band">
+				<input type="submit" name="search-band" class="submit-top">
+			</form>
+		</div>
+		<div class="col-md-offset-4 col-md-2">
+			{% if user.is_authenticated %}
+			<a href="{%url 'band:add_band' %}" class="band-url">Add Band</a>
+			{% endif %}
+		</div>
+	</div>
+</div>
+<div class="container-fluid">
+	<div class="row">
+		{% for band in bands %}
+		<div class="col-md-4">
+			<a href="{% url 'band:band_detail' band.id %}">
+				<div class="caption">
+					<h3>{{ band }}</h3>
+				</div>
+				<div class="thumbnail">
+					<img src="{{band.image_link}}" alt="{{band}}" class="band-image">
+				</div>
+			</a>
+		</div>
+		{% endfor %}
+	</div>
+</div>
+{% endblock %}

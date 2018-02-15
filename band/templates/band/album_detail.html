@@ -1,0 +1,7 @@
+{% extends 'band/base.html' %}
+
+{% block content %}
+	{% for song in songs %}
+		<p>{{ song }}</p>
+	{% endfor %}
+{% endblock %}

@@ -1,0 +1,30 @@
+{% extends 'band/base.html' %}
+
+{% block content %}
+<div class="container-fluid">
+	<div class="row">
+		<div class="col-md-6">
+			<form method="POST">{% csrf_token %}
+				<input type="text" name="song-input" id="song-search" class="search-top" placeholder="Search for a song">
+				<input type="submit" name="search-song" class="submit-top">
+			</form>
+		</div>
+		<div class="col-md-offset-4 col-md-2">
+			{% if user.is_authenticated %}
+			<a href="{%url 'band:add_song' %}" class="band-url">Add Song</a>
+			{% endif %}
+		</div>
+	</div>
+	<div class="row">
+		{% for song in songs %}
+		<div class="col-md-12">
+				<h3 class="float-left padding-right">{{ song.title }}</h3>
+				{% if user.is_authenticated %}
+				<a href="{% url 'band:edit_song' song.id %}"><h3 class="float-left padding-right"">Edit Song</h3></a>
+				<a href="{%url 'band:delete_song' song.id %}"><h3 class="float-left padding-right"">Delete Song</h3></a>
+				{% endif %}
+		</div>
+		{% endfor %}
+	</div>
+</div>
+{% endblock %}
