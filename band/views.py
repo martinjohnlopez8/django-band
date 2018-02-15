@@ -219,8 +219,7 @@ def login(request):
 			user = authenticate(username=username, password=raw_password)
 			band_login(request, user)
 			return redirect('band:band_list')
-	else:
-		form = UserCreationForm()
+	form = UserCreationForm()
 	return render(request, 'band/login.html', {
 		'form': form
 	})
