@@ -15,14 +15,23 @@
 			{% endif %}
 		</div>
 	</div>
+</div>
+<div class="container-fluid">
 	<div class="row">
 		{% for member in members %}
-		<div class="col-md-12">
-				<h3 class="float-left padding-right">{{ member }}</h3>
+		<div class="col-md-4 album-border">
+				<div class="caption">
+					<h4>{{ member.name }} - {{ member.band }}</h4>
+				</div>
+				<div class="thumbnail">
+					<img src="{{member.image_link}}" alt="{{member}}" class="band-image">
+				</div>
+			<div class="edit-delete">
 				{% if user.is_authenticated %}
-				<a href="{% url 'band:edit_musician' member.id %}"><h3 class="float-left padding-right"">Edit musician</h3></a>
-				<a href="{%url 'band:delete_musician' member.id %}"><h3 class="float-left padding-right"">Delete musician</h3></a>
+				<a href="{% url 'band:edit_musician' member.id %}"><h4 class="padding-right"">Edit Musician</h4></a>
+				<a href="{%url 'band:delete_musician' member.id %}"><h4 class="padding-right"">Delete Musician</h4></a>
 				{% endif %}
+			</div>
 		</div>
 		{% endfor %}
 	</div>

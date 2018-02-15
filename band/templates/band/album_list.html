@@ -15,14 +15,25 @@
 			{% endif %}
 		</div>
 	</div>
+</div>
+<div class="container-fluid">
 	<div class="row">
 		{% for album in albums %}
-		<div class="col-md-4">
-				<a href="{% url 'band:album_detail' album.band.id album.id %}"><h3 class="float-left padding-right">{{ album.title }}</h3></a>
+		<div class="col-md-4 album-border">
+			<a href="{% url 'band:album_detail' album.band.id album.id %}">
+				<div class="caption">
+					<h4>{{ album.title }} - {{ album.band }}</h4>
+				</div>
+				<div class="thumbnail">
+					<img src="{{album.image_link}}" alt="{{album}}" class="band-image">
+				</div>
+			</a>
+			<div class="edit-delete">
 				{% if user.is_authenticated %}
-				<a href="{% url 'band:edit_album' album.id %}"><h3 class="float-left padding-right"">Edit Album</h3></a>
-				<a href="{%url 'band:delete_album' album.id %}"><h3 class="float-left padding-right"">Delete Album</h3></a>
+				<a href="{% url 'band:edit_album' album.id %}"><h4 class="padding-right"">Edit Album</h4></a>
+				<a href="{%url 'band:delete_album' album.id %}"><h4 class="padding-right"">Delete Album</h4></a>
 				{% endif %}
+			</div>
 		</div>
 		{% endfor %}
 	</div>
